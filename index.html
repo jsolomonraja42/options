@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Expander</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .color-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            width: 100%;
+        }
+        .color-box {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; color: black; }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            font-size: 48px;
+        }
+        .overlay.show {
+            display: inherit;
+            top: 10%;
+            padding-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="color-container">
+        <div class="color-box red" onclick="toggleExpand(this, 'red')">Option A</div>
+        <div class="color-box green" onclick="toggleExpand(this, 'green')">Option B</div>
+        <div class="color-box blue" onclick="toggleExpand(this, 'blue')">Option C</div>
+        <div class="color-box yellow" onclick="toggleExpand(this, 'yellow')">Option D</div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        function toggleExpand(element, color) {
+            const overlay = document.getElementById('overlay');
+            overlay.classList.remove('show');
+            
+            removeClass(overlay);
+            overlay.classList.add(color);
+            
+            if (overlay.classList.contains('show')) {
+                overlay.classList.remove('show');
+            } else {
+                overlay.style.backgroundColor = element.style.backgroundColor;
+                overlay.textContent = element.textContent;
+                overlay.classList.add('show');
+            }
+        }
+
+        function removeClass(overlay) {
+        	if (overlay.classList.contains('red')) {
+        		overlay.classList.remove('red');	
+        	}
+        	if (overlay.classList.contains('green')) {
+        		overlay.classList.remove('green');	
+        	}
+        	if (overlay.classList.contains('blue')) {
+        		overlay.classList.remove('blue');	
+        	}
+        	if (overlay.classList.contains('yellow')) {
+        		overlay.classList.remove('yellow');	
+        	}
+        }
+    </script>
+</body>
+</html>
